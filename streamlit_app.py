@@ -1,4 +1,3 @@
-
 import pandas as pd
 
 
@@ -6,9 +5,9 @@ file = './data.xlsx'
 
 #Have seperate tables - one for accidents, roads, and vehicles
 
-accident = pd.read_excel(file, sheet_name="Accident")
-road = pd.read_excel(file, sheet_name="Road")
-vehicles = pd.read_excel(file, sheet_name="Vehicle")
+accident_source = pd.read_excel(file, sheet_name=0)
+road_source = pd.read_excel(file, sheet_name=1)
+vehicle_source = pd.read_excel(file, sheet_name=2)
 
 accident = accident_source
 road = road_source
