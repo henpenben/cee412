@@ -46,7 +46,8 @@ accident = accident_source
 vehicle = vehicle_source
 
 
-"we filter out the data tables to the columns we are focusing on (mostly to improve performance)"
+'''we filter out the data tables to the columns we are focusing on (mostly to improve performance and readability)  
+example:'''
 
 accCols = ['CASENO', 'ACCTYPE1', 'ACCTYPE2', 'RDSURF']
 accident = accident[accCols]
@@ -198,7 +199,8 @@ contribDict = {
 
 "now that all of our data has been loaded, and the values been mapped in a dictionary, we are ready to join our tables"
 
-"the vehicle table has a primary key 'CASENO' which is used as a foreign key in the accidents table. the tables are joined in this way"
+'''the vehicle table has a primary key 'CASENO' which is used as a foreign key in the accidents table. the tables are joined in this way.  
+example:'''
 
 st.code("combined = pd.merge(accident, vehicle, on='CASENO')")
 
