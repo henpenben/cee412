@@ -283,6 +283,16 @@ st.pyplot(fig)
 
 
 "### Maybe you want to make your own charts?"
+chartTypes = {
+    "area": st.area_chart,
+    "bar": st.bar_chart,
+    "line": st.line_chart
+}
+
+def makeChart(g, c):
+    chartTypes.get(c)(g)
+
+chosen_chart = st.selectbox("pick your chart type", chartTypes, 1)
 chosen_X = st.selectbox("pick your first group", named.columns)
 wants_G = st.checkbox("group by second element?")
 chosen_G = False
@@ -291,11 +301,15 @@ chosen_G = False
 if(wants_G):
     chosen_G = st.selectbox("group by....", named.columns.drop(chosen_X))
 
+
+
 if(chosen_G):
-    grouped = named.groupby([chosen_X, chosen_G]).size().reset_index(name='count').set_index(chosen_X)
+    sort = st.selectbox("sort by.... (or just click on the table below)", [chosen_X, chosen_G, 'count'])
+    grouped = named.groupby([chosen_X, chosen_G]).size().reset_index(name='count').set_index(chosen_X).sort_values(sort)
 else:
-    grouped = named.groupby([chosen_X]).size().reset_index(name='count').set_index(chosen_X)
-    st.bar_chart(grouped)
+    sort = st.selectbox("sort by....", [chosen_X, 'count'])
+    grouped = named.groupby([chosen_X]).size().reset_index(name='count').set_index(chosen_X).sort_values(sort)
+    makeChart(grouped, chosen_chart)
 
 # num_bins = st.slider("how many bins?", 1, 100, 6, 1)
 
